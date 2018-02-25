@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Card, Col, Collection, CollectionItem, ProgressBar, Row } from 'react-materialize';
+import { Button, Card, Col, Row } from 'react-materialize';
 import { addDownload, changeInput, endDownload, removeDownload, startDownload } from '../actions/downloadsActions';
 import { changeOutputDir } from "../actions/settingsActions";
+import DownloadsList from "../components/DownloadsList";
 
 const path = window.require("path");
 const ffmpeg = window.require('fluent-ffmpeg');
@@ -10,72 +11,43 @@ const ytdl = window.require('ytdl-core');
 const dialog = window.require('electron').remote.dialog;
 
 class App extends Component {
-    render() {
-        const { downloads, outputDir, onAddClick, onRemoveClick, onInputChange, onStartClick, onChangeOutputClick } = this.props;
-        const correctIcon = (download) => {
-            if (!download.isFinished && !download.isDownloading) {
-                return (
-                    <a href='#' onClick={() => onStartClick(download.id, download.info, outputDir)} className="secondary-content">
-                        <i className="material-icons">arrow_downward</i>
-                    </a>
-                )
-            } else if (!download.isFinished && download.isDownloading) {
-                return (
-                    <a className="secondary-content">
-                        <i className="material-icons">autorenew</i>
-                    </a>
-                )
-            } else {
-                return (
-                    <a href='#' onClick={() => onRemoveClick(download.id)} className="secondary-content">
-                        <i className="material-icons">check_circle</i>
-                    </a>
-                )
-            }
+    handleAdd() {
+        this.props.onAddClick(this.props.inputValue);
+    }
 
-        };
-        const progressBar = (download) => {
-            if (!download.isFinished && download.isDownloading) {
-                return (
-                    <ProgressBar/>
-                )
-            }
-        };
-        const downloadsList = downloads.map(function(download){
-            return (
-                    <CollectionItem className='avatar grey darken-3' key={download.id}>
-                        <span className='title'>{download.info.title}</span>
-                        <p>{download.url}</p>
-                        {correctIcon(download)}
-                        {progressBar(download)}
-                    </CollectionItem>
-            );
-        });
+    handleInputChange(value) {
+        this.props.onInputChange(value);
+    }
+
+    handleOutputChange() {
+        this.props.onChangeOutputClick();
+    }
+
+    render() {
+        const { downloads, outputDir, onRemoveClick, onStartClick } = this.props;
+        const listActions = {onStartClick: onStartClick, onRemoveClick: onRemoveClick};
 
         return (
             <Row>
                 <Col className="m3">
                     <Card className='card-content-less-margin dark-panel z-depth-4'>
                         <div className="input-field inline">
-                            <input onChange={(e) => onInputChange(e.target.value)} type="text" className="active"/>
+                            <input onChange={(e) => this.handleInputChange(e.target.value)} type="text" className="active"/>
                             <label htmlFor="first_name">Url</label>
                         </div>
                         <br/>
-                        <Button className='purple darken-3' onClick={() => onAddClick(this.props.inputValue)}>Add Download</Button>
+                        <Button className='purple darken-3' onClick={() => this.handleAdd()}>Add Download</Button>
                         <hr/>
                         <p>Output dir: {this.props.outputDir? this.props.outputDir : "\\"}</p>
                         <br/>
-                        <Button className='purple darken-3'
-                                onClick={() => onChangeOutputClick()}>
+                        <Button className='purple darken-3' onClick={() => this.handleOutputChange()}>
                             Set
                         </Button>
                     </Card>
                 </Col>
                 <Col className="m7 offset-m1">
                     <Card className='dark-panel z-depth-4'>
-                        <Collection>
-                            {downloadsList}
-                        </Collection>
+                        <DownloadsList downloads={downloads} outputDir={outputDir} actions={listActions}/>
                     </Card>
                 </Col>
             </Row>
