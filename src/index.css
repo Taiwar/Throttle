@@ -1,0 +1,69 @@
+body {
+    background: #212121;
+    background-size: cover !important;
+    -webkit-background-origin: border !important;
+}
+
+
+fieldset {
+    border: none !important;
+}
+
+.card.edged, .card-panel.edged {
+    border: 1px solid #4527a0;
+}
+
+.dark-panel{
+    background: #333333 !important;
+}
+
+.darkest {
+    background: #111111 !important;
+}
+
+.card-action a {
+    color: #7c4dff !important;
+}
+
+.sidenav {
+    background: #212121 !important;
+}
+
+.sidenav a {
+    color: white !important;
+}
+
+.sidenav a:hover {
+    background: #323232 !important;
+}
+
+.collection {
+    background: inherit !important;
+    border: none !important;
+    margin-top: 0 !important;
+}
+
+.collection-item {
+    color: white;
+}
+
+.collection-header h5 {
+    font-size: 1.24rem !important;
+    margin: .8rem 0 .3rem .5rem !important;
+}
+
+.collection .collection-item.avatar {
+    padding-left: 10px !important;
+}
+
+span.title {
+    font-weight: bold;
+}
+
+h1, h2, h3, h4, h5, p, input {
+    color: white !important;
+}
+
+p {
+    font-size: 14pt;
+}

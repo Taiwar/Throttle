@@ -1,0 +1,15 @@
+{
+  "short_name": "Throttle",
+  "name": "Throttle",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#4a148c",
+  "background_color": "#212121"
+}
