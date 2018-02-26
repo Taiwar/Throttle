@@ -43,6 +43,7 @@
   },
   "build": {
     "appId": "net.temporus.throttle",
+    "icon": "build/icon.png",
     "files": [
       "build/**/*"
     ],
