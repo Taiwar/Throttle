@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Card, Col, Row } from 'react-materialize';
+import {Button, Card, Col, Navbar, NavItem, Row} from 'react-materialize';
 import { addDownload, changeInput, endDownload, removeDownload, startDownload } from '../actions/downloadsActions';
 import { changeOutputDir } from "../actions/settingsActions";
 import DownloadsList from "../components/DownloadsList";
@@ -28,29 +28,37 @@ class App extends Component {
         const listActions = {onStartClick: onStartClick, onRemoveClick: onRemoveClick};
 
         return (
-            <Row>
-                <Col className="m3">
-                    <Card className='card-content-less-margin dark-panel z-depth-4'>
-                        <div className="input-field inline">
-                            <input onChange={(e) => this.handleInputChange(e.target.value)} type="text" className="active"/>
-                            <label htmlFor="first_name">Url</label>
-                        </div>
-                        <br/>
-                        <Button className='purple darken-3' onClick={() => this.handleAdd()}>Add Download</Button>
-                        <hr/>
-                        <p>Output dir: {this.props.outputDir? this.props.outputDir : "\\"}</p>
-                        <br/>
-                        <Button className='purple darken-3' onClick={() => this.handleOutputChange()}>
-                            Set
-                        </Button>
-                    </Card>
-                </Col>
-                <Col className="m7 offset-m1">
-                    <Card className='dark-panel z-depth-4'>
-                        <DownloadsList downloads={downloads} outputDir={outputDir} actions={listActions}/>
-                    </Card>
-                </Col>
-            </Row>
+            <div>
+                <nav className="purple darken-4">
+                    <div className="nav-wrapper">
+                        <ul className="left">
+                            <li>
+                                <input placeholder="Url" onChange={(e) => this.handleInputChange(e.target.value)} type="text" className="active"/>
+                            </li>
+                            <li>
+                                <Button className='purple darken-3' onClick={() => this.handleAdd()}>Add Download</Button>
+                            </li>
+                        </ul>
+                        <ul className="right">
+                            <li className="input-field inline">
+                                Output dir: {this.props.outputDir? this.props.outputDir : "\\"}
+                            </li>
+                            <li>
+                                <Button className='purple darken-3' onClick={() => this.handleOutputChange()}>
+                                    Set
+                                </Button>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <Row>
+                    <Col className="m8 offset-m2">
+                        <Card className='dark-panel z-depth-4'>
+                            <DownloadsList downloads={downloads} outputDir={outputDir} actions={listActions}/>
+                        </Card>
+                    </Col>
+                </Row>
+            </div>
         );
     }
 }

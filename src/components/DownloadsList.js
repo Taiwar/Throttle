@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Collection, CollectionItem, ProgressBar} from "react-materialize";
+import { Collection, CollectionItem, ProgressBar } from "react-materialize";
 
 export default class DownloadsList extends Component {
     render() {

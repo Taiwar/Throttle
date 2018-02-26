@@ -9,6 +9,12 @@ fieldset {
     border: none !important;
 }
 
+.nav-wrapper li {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
 .card.edged, .card-panel.edged {
     border: 1px solid #4527a0;
 }
