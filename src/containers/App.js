@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Button, Card, Col, Row} from 'react-materialize';
+import { Button, Card, Col, Row } from 'react-materialize';
 import { addDownload, changeInput, endDownload, removeDownload, startDownload } from '../actions/downloadsActions';
 import { changeOutputDir } from "../actions/settingsActions";
 import DownloadsList from "../components/DownloadsList";
@@ -91,10 +91,12 @@ export default connect(
                 // TODO: Look into formats, don't just choose the first one
                 let format = ytdl.filterFormats(info.formats, 'audioonly')[0];
                 let stream = ytdl.downloadFromInfo(info, { filter: 'audioonly', format: format});
-                console.log(info);
                 let proc = new ffmpeg({source:stream});
-                // proc.setFfmpegPath('./node_modules/ffmpeg-binaries/bin/ffmpeg.exe');
-                proc.setFfmpegPath('./resources/app.asar.unpacked/node_modules/ffmpeg-binaries/bin/ffmpeg.exe');
+                if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+                    proc.setFfmpegPath('./node_modules/ffmpeg-binaries/bin/ffmpeg.exe');
+                } else {
+                    proc.setFfmpegPath('./resources/app.asar.unpacked/node_modules/ffmpeg-binaries/bin/ffmpeg.exe');
+                }
                 proc.withAudioCodec('libmp3lame')
                     .toFormat('mp3')
                     .output(path.join(outputDir, info.title + '.mp3'))
