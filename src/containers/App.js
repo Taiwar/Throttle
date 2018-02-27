@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Button, Card, Col, Navbar, NavItem, Row} from 'react-materialize';
+import {Button, Card, Col, Row} from 'react-materialize';
 import { addDownload, changeInput, endDownload, removeDownload, startDownload } from '../actions/downloadsActions';
 import { changeOutputDir } from "../actions/settingsActions";
 import DownloadsList from "../components/DownloadsList";
@@ -93,7 +93,8 @@ export default connect(
                 let stream = ytdl.downloadFromInfo(info, { filter: 'audioonly', format: format});
                 console.log(info);
                 let proc = new ffmpeg({source:stream});
-                proc.setFfmpegPath('./node_modules/ffmpeg-binaries/bin/ffmpeg.exe');
+                // proc.setFfmpegPath('./node_modules/ffmpeg-binaries/bin/ffmpeg.exe');
+                proc.setFfmpegPath('./resources/app.asar.unpacked/node_modules/ffmpeg-binaries/bin/ffmpeg.exe');
                 proc.withAudioCodec('libmp3lame')
                     .toFormat('mp3')
                     .output(path.join(outputDir, info.title + '.mp3'))
