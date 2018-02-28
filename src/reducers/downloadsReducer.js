@@ -28,8 +28,8 @@ export default function reducer (state={
             return {
                 ...state,
                 downloads: state.downloads.map(downloads =>
-                    (downloads.id === action.payload)
-                        ? {...downloads, isDownloading: true}
+                    (downloads.id === action.payload.id)
+                        ? {...downloads, isDownloading: true, proc: action.payload.proc}
                         : downloads
                 ),
             }

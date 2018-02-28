@@ -5,6 +5,7 @@ import { addDownload, changeInput, endDownload, removeDownload, startDownload } 
 import { changeOutputDir } from "../actions/settingsActions";
 import DownloadsList from "../components/DownloadsList";
 
+const fs = window.require("fs");
 const path = window.require("path");
 const ffmpeg = window.require('fluent-ffmpeg');
 const ytdl = window.require('ytdl-core');
@@ -41,7 +42,7 @@ class App extends Component {
                         </ul>
                         <ul className="right">
                             <li className="input-field inline">
-                                Output dir: {this.props.outputDir? this.props.outputDir : "\\"}
+                                <b>Output dir: </b>{this.props.outputDir? this.props.outputDir : "./"}
                             </li>
                             <li>
                                 <Button className='purple darken-3' onClick={() => this.handleOutputChange()}>
@@ -72,6 +73,13 @@ export default connect(
         };
     },
     (dispatch) => {
+        ytdl.getInfo("https://www.youtube.com/watch?v=3UFO138cGo8", function(err, info){
+            if (err) {
+                console.log(err);
+                return
+            }
+            dispatch(addDownload("https://www.youtube.com/watch?v=3UFO138cGo8", info));
+        });
         return {
             onInputChange: (input) => dispatch(changeInput(input)),
             onAddClick: (url) => {
@@ -80,14 +88,16 @@ export default connect(
                         console.log(err);
                         return
                     }
-                    dispatch(addDownload(url, info))
+                    dispatch(addDownload(url, info));
                 });
             },
-            onRemoveClick: (id) => {
-                dispatch(removeDownload(id))
+            onRemoveClick: (download) => {
+                if (download.proc && !download.isFinished) {
+                    download.proc.kill();
+                }
+                dispatch(removeDownload(download.id));
             },
             onStartClick: (id, info, outputDir) => {
-                dispatch(startDownload(id));
                 // TODO: Look into formats, don't just choose the first one
                 let format = ytdl.filterFormats(info.formats, 'audioonly')[0];
                 let stream = ytdl.downloadFromInfo(info, { filter: 'audioonly', format: format});
@@ -101,15 +111,21 @@ export default connect(
                     .toFormat('mp3')
                     .output(path.join(outputDir, info.title + '.mp3'))
                     .run();
+                dispatch(startDownload(id, proc));
                 proc.on('end', function() {
                     dispatch(endDownload(id));
                 });
+                proc.on('error', function(err) {
+                    console.log("FFMPEG stopped", err);
+                    fs.unlink(this._currentOutput.target, (err) => console.log("Couldn't delete file", err));
+                });
+                console.log("proc", proc);
             },
             onChangeOutputClick: () => {
                 // noinspection JSCheckFunctionSignatures
                 dialog.showOpenDialog(null, {properties: ['openDirectory']},
                     (dirname) => {
-                        dispatch(changeOutputDir(dirname.toString()))
+                        dispatch(changeOutputDir(dirname.toString()));
                     }
                 );
             }
