@@ -15,7 +15,7 @@ export default function reducer (state={
                 ...state,
                 downloads: state.downloads.filter(downloads => {
                     return downloads.id !== action.payload;
-                }),
+                })
             }
         }
         case "CHANGE_INPUT": {
@@ -31,7 +31,13 @@ export default function reducer (state={
                     (downloads.id === action.payload.id)
                         ? {...downloads, isDownloading: true, proc: action.payload.proc}
                         : downloads
-                ),
+                )
+            }
+        }
+        case "START_DOWNLOADS": {
+            return {
+                ...state,
+                downloads: action.payload
             }
         }
         case "END_DOWNLOAD": {
@@ -41,7 +47,7 @@ export default function reducer (state={
                     (downloads.id === action.payload)
                         ? {...downloads, isDownloading: false, isFinished: true}
                         : downloads
-                ),
+                )
             }
         }
         default: {

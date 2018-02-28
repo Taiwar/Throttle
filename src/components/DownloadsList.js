@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Collection, CollectionItem, ProgressBar } from "react-materialize";
+import { Collection, CollectionItem, Icon, ProgressBar } from "react-materialize";
 
 export default class DownloadsList extends Component {
     render() {
@@ -8,21 +8,17 @@ export default class DownloadsList extends Component {
         const correctIcon = (download) => {
             if (!download.isFinished && !download.isDownloading) {
                 return (
-                    <a href='#' onClick={() => actions.onStartClick(download.id, download.info, outputDir)} className="">
-                        <i className="material-icons green-text">arrow_downward</i>
+                    <a href='#' onClick={() => actions.onStartClick(download.id, download.info, outputDir)}>
+                        <Icon className="green-text">arrow_downward</Icon>
                     </a>
                 )
             } else if (!download.isFinished && download.isDownloading) {
                 return (
-                    <a className="">
-                        <i className="material-icons">autorenew</i>
-                    </a>
+                    <Icon className="blue-text">autorenew</Icon>
                 )
             } else {
                 return (
-                    <a href='#' onClick={() => actions.onRemoveClick(download)} className="">
-                        <i className="material-icons purple-text">check_circle</i>
-                    </a>
+                    <Icon className="green-text">check_circle</Icon>
                 )
             }
 
@@ -46,7 +42,7 @@ export default class DownloadsList extends Component {
                             <div className='col m1 action-col'>
                                 <div className='row'>
                                     <a href='#' onClick={() => actions.onRemoveClick(download)} className="">
-                                        <i className="material-icons grey-text">clear</i>
+                                        <Icon className="grey-text">clear</Icon>
                                     </a>
                                 </div>
                                 <div className='row'>

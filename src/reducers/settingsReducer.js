@@ -1,5 +1,6 @@
 export default function reducer (state={
     outputDir: "",
+    ffmpegPath: "",
     error: null
 }, action){
     switch(action.type) {

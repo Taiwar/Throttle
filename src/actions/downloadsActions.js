@@ -1,14 +1,31 @@
 let dlCounter = 0;
+const downloadTemplate = {
+    type: "ADD_DOWNLOAD",
+    payload: {
+        id: 0,
+        url: "",
+        info: "",
+        isDownloading: false,
+        isFinished: false
+    }
+};
+
 export function addDownload(url, info) {
     return {
         type: "ADD_DOWNLOAD",
         payload: {
+            ...downloadTemplate,
             id: dlCounter++,
             url: url,
-            info: info,
-            isDownloading: false,
-            isFinished: false
+            info: info
         }
+    }
+}
+
+export function startDownloads(downloads) {
+    return {
+        type: "START_DOWNLOADS",
+        payload: downloads
     }
 }
 
