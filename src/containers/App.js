@@ -48,13 +48,6 @@ export default connect(
         };
     },
     (dispatch) => {
-        ytdl.getInfo("https://www.youtube.com/watch?v=W_Kd9B0-oDQ", function(err, info){
-            if (err) {
-                console.log(err);
-                return
-            }
-            dispatch(addDownload("https://www.youtube.com/watch?v=W_Kd9B0-oDQ", info));
-        });
         return {
             onRemoveClick: (download) => {
                 if (download.proc && !download.isFinished) {
