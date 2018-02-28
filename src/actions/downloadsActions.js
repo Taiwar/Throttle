@@ -19,10 +19,13 @@ export function removeDownload(id) {
     }
 }
 
-export function startDownload(id) {
+export function startDownload(id, proc) {
     return {
         type: "START_DOWNLOAD",
-        payload: id
+        payload: {
+            id: id,
+            proc: proc
+        }
     }
 }
 

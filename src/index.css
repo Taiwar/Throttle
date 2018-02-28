@@ -47,10 +47,21 @@ fieldset {
     background: inherit !important;
     border: none !important;
     margin-top: 0 !important;
+    padding: 0 !important;
+}
+
+.card-content {
+    padding: 10px !important;
 }
 
 .collection-item {
     color: white;
+}
+
+.collection-item .row{
+    margin-bottom: 0;
+    padding-right: 0;
+    margin-right: -3rem;
 }
 
 .collection-header h5 {
