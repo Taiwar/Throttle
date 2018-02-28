@@ -2,11 +2,27 @@ body {
     background: #212121;
     background-size: cover !important;
     -webkit-background-origin: border !important;
+    min-height: 100vh;
+    padding-bottom: 100px;
 }
 
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+}
 
 fieldset {
     border: none !important;
+}
+
+h1, h2, h3, h4, h5, p, input {
+    color: white !important;
+}
+
+p {
+    font-size: 14pt;
 }
 
 .nav-wrapper li {
@@ -14,9 +30,8 @@ fieldset {
     padding-right: 10px;
 }
 
-
-.card.edged, .card-panel.edged {
-    border: 1px solid #4527a0;
+span.title {
+    font-weight: bold;
 }
 
 .dark-panel{
@@ -27,31 +42,12 @@ fieldset {
     background: #111111 !important;
 }
 
-.card-action a {
-    color: #7c4dff !important;
-}
-
-.sidenav {
-    background: #212121 !important;
-}
-
-.sidenav a {
-    color: white !important;
-}
-
-.sidenav a:hover {
-    background: #323232 !important;
-}
-
 .collection {
     background: inherit !important;
     border: none !important;
     margin-top: 0 !important;
+    margin-bottom: 0 !important;
     padding: 0 !important;
-}
-
-.card-content {
-    padding: 10px !important;
 }
 
 .collection-item {
@@ -73,14 +69,7 @@ fieldset {
     padding-left: 10px !important;
 }
 
-span.title {
-    font-weight: bold;
+.card-content {
+    padding: 10px !important;
 }
 
-h1, h2, h3, h4, h5, p, input {
-    color: white !important;
-}
-
-p {
-    font-size: 14pt;
-}
