@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Card, Col, Row } from 'react-materialize';
-import {addDownload, endDownload, removeDownload, startDownload, startDownloads} from '../actions/downloadsActions';
+import {endDownload, removeDownload, startDownload, startDownloads} from '../actions/downloadsActions';
 import DownloadsList from '../components/DownloadsList';
 import HeaderBar from './HeaderBar';
 import sanitize from 'sanitize-filename';

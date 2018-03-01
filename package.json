@@ -6,6 +6,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "clipboardy": "^1.2.3",
     "electron-is-dev": "^0.3.0",
     "ffmpeg-binaries": "^3.2.2-3",
     "fluent-ffmpeg": "^2.1.2",

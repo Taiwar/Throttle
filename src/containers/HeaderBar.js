@@ -1,15 +1,22 @@
 import React, { Component } from "react";
-import { Button } from "react-materialize";
+import { Button, Icon } from "react-materialize";
 import { addDownload, changeInput } from "../actions/downloadsActions";
 import { connect } from "react-redux";
 import { changeOutputDir } from "../actions/settingsActions";
 
 const ytdl = window.require('ytdl-core');
+const clipboardy = window.require('clipboardy');
 const dialog = window.require('electron').remote.dialog;
 
 class HeaderBar extends Component {
     handleAdd() {
         this.props.onAddClick(this.props.inputValue);
+    }
+
+    handleAddFromClip() {
+        clipboardy.read().then((clip) => {
+            this.props.onAddClick(clip);
+        });
     }
 
     handleInputChange(value) {
@@ -31,6 +38,9 @@ class HeaderBar extends Component {
                         <li>
                             <Button className='purple darken-3' onClick={() => this.handleAdd()}>Add Download</Button>
                         </li>
+                        <li>
+                            <Button className='purple darken-3' onClick={() => this.handleAddFromClip()}>Add From Clipboard</Button>
+                        </li>
                     </ul>
                     <ul className="right">
                         <li className="input-field inline">
@@ -40,6 +50,11 @@ class HeaderBar extends Component {
                             <Button className='purple darken-3' onClick={() => this.handleOutputChange()}>
                                 Set
                             </Button>
+                        </li>
+                        <li>
+                            <a href='#' className="">
+                                <Icon className="white-text">settings</Icon>
+                            </a>
                         </li>
                     </ul>
                 </div>
