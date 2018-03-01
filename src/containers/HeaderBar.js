@@ -3,6 +3,7 @@ import { Button, Icon } from "react-materialize";
 import { addDownload, changeInput } from "../actions/downloadsActions";
 import { connect } from "react-redux";
 import { changeOutputDir } from "../actions/settingsActions";
+import { Link } from "react-router-dom";
 
 const ytdl = window.require('ytdl-core');
 const clipboardy = window.require('clipboardy');
@@ -52,9 +53,9 @@ class HeaderBar extends Component {
                             </Button>
                         </li>
                         <li>
-                            <a href='#' className="">
+                            <Link to="settings">
                                 <Icon className="white-text">settings</Icon>
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </div>
