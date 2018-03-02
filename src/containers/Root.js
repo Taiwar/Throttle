@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
-import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
+import { connect, Provider } from 'react-redux';
 import Routes from '../routes';
+import { changeFfmpegPath } from "../actions/settingsActions";
+import { ConnectedRouter } from "react-router-redux";
 
-export default class Root extends Component {
+const ffbinaries = window.require('ffbinaries');
+const fs = window.require('fs');
+const os = window.require("os");
+
+class Root extends Component {
+    componentWillMount() {
+        this.props.readyFfmpeg();
+    }
+
     render() {
         return (
             <Provider store={this.props.store}>
@@ -14,3 +23,27 @@ export default class Root extends Component {
         );
     }
 }
+
+export default connect(
+    (store) => {
+        return {
+            ffmpegPath: store.settings.ffmpegPath
+        };
+    },
+    (dispatch) => {
+        return {
+            readyFfmpeg: () => {
+                let dest = './binaries';
+                if (!fs.existsSync(dest)) {
+                    console.log("OS type", os.type());
+                    ffbinaries.downloadFiles(['ffmpeg'], {
+                        platform: 'win32',
+                        quiet: true,
+                        destination: dest
+                    }, function () {
+                        dispatch(changeFfmpegPath(dest))
+                    });
+                }
+            }
+        }
+    })(Root)

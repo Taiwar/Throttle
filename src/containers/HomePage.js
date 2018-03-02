@@ -59,11 +59,7 @@ export default connect(
                 const format = ytdl.filterFormats(info.formats, 'audioonly')[0];
                 const stream = ytdl.downloadFromInfo(info, { filter: 'audioonly', format: format});
                 const proc = new ffmpeg({source:stream});
-                if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-                    proc.setFfmpegPath('./node_modules/ffmpeg-binaries/bin/ffmpeg.exe');
-                } else {
-                    proc.setFfmpegPath('./resources/app.asar.unpacked/node_modules/ffmpeg-binaries/bin/ffmpeg.exe');
-                }
+                proc.setFfmpegPath('./binaries/ffmpeg.exe');
                 proc.withAudioCodec('libmp3lame')
                     .toFormat('mp3')
                     .output(path.join(outputDir, info.title + '.mp3'))
@@ -83,11 +79,7 @@ export default connect(
                     const format = ytdl.filterFormats(download.info.formats, 'audioonly')[0];
                     let stream = ytdl.downloadFromInfo(download.info, { filter: 'audioonly', format: format});
                     let proc = new ffmpeg({source:stream});
-                    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-                        proc.setFfmpegPath('./node_modules/ffmpeg-binaries/bin/ffmpeg.exe');
-                    } else {
-                        proc.setFfmpegPath('./resources/app.asar.unpacked/node_modules/ffmpeg-binaries/bin/ffmpeg.exe');
-                    }
+                    proc.setFfmpegPath('./binaries/ffmpeg.exe');
                     proc.withAudioCodec('libmp3lame')
                         .toFormat('mp3')
                         .output(path.join(outputDir, sanitize(download.info.title) + '.mp3'))

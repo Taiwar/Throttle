@@ -4,3 +4,10 @@ export function changeOutputDir(path) {
         payload: path
     }
 }
+
+export function changeFfmpegPath(path) {
+    return {
+        type: "CHANGE_FFMPEG_PATH",
+        payload: path
+    }
+}

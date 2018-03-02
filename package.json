@@ -7,7 +7,7 @@
   "private": true,
   "dependencies": {
     "electron-is-dev": "^0.3.0",
-    "ffmpeg-binaries": "^3.2.2-3",
+    "ffbinaries": "^1.0.7",
     "fluent-ffmpeg": "^2.1.2",
     "history": "latest",
     "react": "^16.2.0",
