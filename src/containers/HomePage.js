@@ -10,6 +10,7 @@ const fs = window.require("fs");
 const path = window.require("path");
 const ffmpeg = window.require('fluent-ffmpeg');
 const ytdl = window.require('ytdl-core');
+const NodeID3 = window.require('node-id3');
 
 class HomePage extends Component {
     handleStartAll() {
@@ -59,12 +60,17 @@ export default connect(
                 const format = ytdl.filterFormats(info.formats, 'audioonly')[0];
                 const stream = ytdl.downloadFromInfo(info, { filter: 'audioonly', format: format});
                 const proc = new ffmpeg({source:stream});
+                let tags = {
+                    title: sanitize(info.title),
+                    artist: sanitize(info.author.name),
+                };
                 proc.setFfmpegPath('./binaries/ffmpeg.exe');
                 proc.withAudioCodec('libmp3lame')
                     .toFormat('mp3')
-                    .output(path.join(outputDir, info.title + '.mp3'))
+                    .output(path.join(outputDir, sanitize(info.title)  + '.mp3'))
                     .run();
                 proc.on('end', function() {
+                    NodeID3.write(tags, this._currentOutput.target);
                     dispatch(endDownload(id));
                 });
                 proc.on('error', function(err) {
