@@ -6,7 +6,7 @@ import { changeOutputDir } from "../actions/settingsActions";
 import { Link } from "react-router-dom";
 
 const ytdl = window.require('ytdl-core');
-const clipboardy = window.require('clipboardy');
+const clipboard = window.require('electron').clipboard;
 const dialog = window.require('electron').remote.dialog;
 
 class HeaderBar extends Component {
@@ -15,9 +15,7 @@ class HeaderBar extends Component {
     }
 
     handleAddFromClip() {
-        clipboardy.read().then((clip) => {
-            this.props.onAddClick(clip);
-        });
+        this.props.onAddClick(clipboard.readText());
     }
 
     handleInputChange(value) {
