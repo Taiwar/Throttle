@@ -35,9 +35,8 @@ export default connect(
             readyFfmpeg: () => {
                 let dest = './binaries';
                 if (!fs.existsSync(dest)) {
-                    console.log("OS type", os.type());
                     ffbinaries.downloadFiles(['ffmpeg'], {
-                        platform: 'win32',
+                        platform: os.platform(),
                         quiet: true,
                         destination: dest
                     }, function () {
