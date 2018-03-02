@@ -90,8 +90,13 @@ export default connect(
                         .toFormat('mp3')
                         .output(path.join(outputDir, sanitize(download.info.title) + '.mp3'))
                         .run();
+                    let tags = {
+                        title: sanitize(download.info.title),
+                        artist: sanitize(download.info.author.name),
+                    };
                     startedDownloads.push({...download, proc: proc, isDownloading: true});
                     proc.on('end', function() {
+                        NodeID3.write(tags, this._currentOutput.target);
                         dispatch(endDownload(download.id));
                     });
                     proc.on('error', function(err) {
