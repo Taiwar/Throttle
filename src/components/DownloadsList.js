@@ -37,7 +37,10 @@ export default class DownloadsList extends Component {
                         <div className='row'>
                             <div className='col m11'>
                                 <span className='title'>{download.info.title}</span>
-                                <p>{download.url}</p>
+                                <br/>
+                                <span>{download.info.author.name}</span>
+                                <br/>
+                                <span className='grey-text'>{download.url}</span>
                             </div>
                             <div className='col m1 action-col'>
                                 <div className='row'>
