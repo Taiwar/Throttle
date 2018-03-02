@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { Button, Icon } from "react-materialize";
-import { addDownload, changeInput } from "../actions/downloadsActions";
-import { connect } from "react-redux";
-import { changeOutputDir } from "../actions/settingsActions";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { Button, Icon } from 'react-materialize';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { addDownload, changeInput } from '../actions/downloadsActions';
+import { changeOutputDir } from '../actions/settingsActions';
 
 const ytdl = window.require('ytdl-core');
 const clipboard = window.require('electron').clipboard;

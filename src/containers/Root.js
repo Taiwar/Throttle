@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect, Provider } from 'react-redux';
 import Routes from '../routes';
-import { changeFfmpegPath } from "../actions/settingsActions";
-import { ConnectedRouter } from "react-router-redux";
+import { changeFfmpegPath } from '../actions/settingsActions';
+import { ConnectedRouter } from 'react-router-redux';
 
 const ffbinaries = window.require('ffbinaries');
 const fs = window.require('fs');
-const os = window.require("os");
+const os = window.require('os');
 
 class Root extends Component {
     componentWillMount() {

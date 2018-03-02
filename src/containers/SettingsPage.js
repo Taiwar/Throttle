@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Card, Col, Icon, Row } from "react-materialize";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { Card, Col, Icon, Row } from 'react-materialize';
+import { Link } from 'react-router-dom';
 
 export default class SettingsPage extends Component {
     render() {

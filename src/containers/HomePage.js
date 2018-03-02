@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import { Button, Card, Col, Row } from "react-materialize";
-import HeaderBar from "../containers/HeaderBar";
-import DownloadsList from "../components/DownloadsList";
+import React, { Component } from 'react';
+import { Button, Card, Col, Row } from 'react-materialize';
+import HeaderBar from '../containers/HeaderBar';
+import DownloadsList from '../components/DownloadsList';
 import { connect } from 'react-redux';
 import { endDownload, removeDownload, startDownload, startDownloads } from '../actions/downloadsActions';
 import sanitize from 'sanitize-filename';
 
-const fs = window.require("fs");
-const path = window.require("path");
+const fs = window.require('fs');
+const path = window.require('path');
 const ffmpeg = window.require('fluent-ffmpeg');
 const ytdl = window.require('ytdl-core');
 const NodeID3 = window.require('node-id3');
