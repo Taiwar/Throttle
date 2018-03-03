@@ -3,6 +3,7 @@ import { connect, Provider } from 'react-redux';
 import Routes from '../routes';
 import { changeFfmpegPath } from '../actions/settingsActions';
 import { ConnectedRouter } from 'react-router-redux';
+import { PersistGate } from 'redux-persist/integration/react'
 
 const ffbinaries = window.require('ffbinaries');
 const fs = window.require('fs');
@@ -16,9 +17,11 @@ class Root extends Component {
     render() {
         return (
             <Provider store={this.props.store}>
-                <ConnectedRouter history={this.props.history}>
-                    <Routes />
-                </ConnectedRouter>
+                <PersistGate loading={null} persistor={this.props.persistor}>
+                    <ConnectedRouter history={this.props.history}>
+                        <Routes />
+                    </ConnectedRouter>
+                </PersistGate>
             </Provider>
         );
     }
