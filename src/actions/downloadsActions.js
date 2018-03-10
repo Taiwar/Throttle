@@ -1,13 +1,7 @@
 let dlCounter = 0;
 const downloadTemplate = {
-    type: "ADD_DOWNLOAD",
-    payload: {
-        id: 0,
-        url: "",
-        info: "",
-        isDownloading: false,
-        isFinished: false
-    }
+    isDownloading: false,
+    isFinished: false
 };
 
 export function addDownload(url, info) {
