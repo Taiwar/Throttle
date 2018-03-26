@@ -43,10 +43,10 @@ export default function reducer (state={
         case "END_DOWNLOAD": {
             return {
                 ...state,
-                downloads: state.downloads.map(downloads =>
-                    (downloads.id === action.payload)
-                        ? {...downloads, isDownloading: false, isFinished: true}
-                        : downloads
+                downloads: state.downloads.map(download =>
+                    (download.id === action.payload)
+                        ? {...download, isDownloading: false, isFinished: true}
+                        : download
                 )
             }
         }
