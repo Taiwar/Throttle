@@ -31,7 +31,7 @@
   "devDependencies": {
     "eslint": "^5.16.0",
     "concurrently": "^3.5.1",
-    "electron": "^1.8.4",
+    "electron": "^7.2.4",
     "electron-builder": "^20.2.0",
     "wait-on": "^2.1.0"
   },
